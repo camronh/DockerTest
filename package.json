@@ -5,10 +5,10 @@
   "author": "First Last <first.last@example.com>",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node playwright"
   },
   "dependencies": {
-    "aws-sdk": "^2.759.0",
-    "playwright-firefox": "^1.4.1"
+    "aws-lambda-ric": "^1.0.0",
+    "aws-sdk": "^2.759.0"
   }
 }

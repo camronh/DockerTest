@@ -1,0 +1,4 @@
+Run this command to install playwright-firefox to node_modules
+
+
+PLAYWRIGHT_BROWSERS_PATH=0 npm i playwright-firefox

@@ -1,9 +1,9 @@
 
 
-FROM node:14-buster
+FROM node:12-buster
 
 
-# 2. Install WebKit dependencies
+# 1. Install WebKit dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libwoff1 \
     libopus0 \
@@ -27,17 +27,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgtk-3-0 \
     libharfbuzz-icu0
 
-# 5. Install Firefox dependencies
+# 2. Install Firefox dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libdbus-glib-1-2 \
     libxt6
 
-# 6. Install ffmpeg to bring in audio and video codecs necessary for playing videos in Firefox.
+# 3. Install ffmpeg to bring in audio and video codecs necessary for playing videos in Firefox.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg
 
 
-# 7. Install aws-lambda-cpp build dependencies
+# 4. Install aws-lambda-cpp build dependencies
 RUN apt-get update && \
     apt-get install -y \
     g++ \
@@ -46,13 +46,18 @@ RUN apt-get update && \
     unzip \
     libcurl4-openssl-dev
 
-COPY playwright.js package*.json ./
 
-# RUN npm install aws-lambda-ric playwright
+WORKDIR /usr/app
+
+COPY . .
+
+COPY package.json .
+
+# Installs firefox inside of node_modules
+RUN PLAYWRIGHT_BROWSERS_PATH=0 npm i playwright-firefox
+
 RUN npm install
 
-
-# CMD [ "playwright.lambdaHandler" ]
 
 ENTRYPOINT ["/usr/local/bin/npx", "aws-lambda-ric"]
 CMD [ "playwright.lambdaHandler" ]
