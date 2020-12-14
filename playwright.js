@@ -98,4 +98,4 @@ async function test() {
   const url = await task.scrapeScreenshot();
   console.log({ url });
 }
-// test();
+test();

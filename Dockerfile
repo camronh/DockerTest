@@ -59,5 +59,7 @@ RUN PLAYWRIGHT_BROWSERS_PATH=0 npm i playwright-firefox
 RUN npm install
 
 
-ENTRYPOINT ["/usr/local/bin/npx", "aws-lambda-ric"]
-CMD [ "playwright.lambdaHandler" ]
+# ENTRYPOINT ["/usr/local/bin/npx", "aws-lambda-ric"]
+# CMD [ "playwright.lambdaHandler" ]
+
+CMD [ "playwright" ]
